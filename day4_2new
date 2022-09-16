@@ -1,0 +1,30 @@
+package day4_2new;
+import java.io.*;
+
+public class Day4_2new {
+
+    public static void main(String[] args) {
+       double dat[] = {3,7.123,1,-5.05,9.11};
+//       save(dat,"data.txt");
+       load("data.txt"); //должен просто прочитать и напечатать на экран
+    }
+    public static void load(String name){
+        try(DataInputStream dis = new DataInputStream(new FileInputStream(name))){
+            double d;
+            //(2) а тут как-то загрузить эту длину
+            while(true) {
+                d=dis.readDouble();
+                System.out.println(d);
+            }
+        }
+        catch(EOFException ex) {System.out.println("end of file");} // вот что б так не делать, надо сохранить(1) длину массива, а потом её загрузить(2)
+        catch(IOException ex){ex.printStackTrace();}
+    }
+    public static void save(double d[], String name){
+        try(DataOutputStream dos = new DataOutputStream(new FileOutputStream(name))){
+            //(1)вот тут надо как то сохранить длину массива
+            for(var item : d) dos.writeDouble(item);
+        }
+        catch(IOException ex){ex.printStackTrace();}
+    }
+}
